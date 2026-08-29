@@ -115,32 +115,7 @@ body {
 	   decompressed here via DecompressionStream. Falls back to the raw files
 	   hosted by GitHub Pages when the mirror is unreachable. */
 	(function () {
-		const GZ_MIRROR = "https://cdn.jsdmirror.com/gh/RookieCube/scary-yalu-escape@8f9e8dde9ecd/docs";
-		const origFetch = window.fetch;
-		window.fetch = function (input, init) {
-			const url = typeof input === "string" ? input : (input && input.url) || "";
-			if (url && !url.endsWith(".gz") && /\.wasm$|\.pck$/.test(url)) {
-				const name = url.split("/").pop();
-				const mime = url.endsWith(".wasm") ? "application/wasm" : "application/octet-stream";
-				return origFetch(GZ_MIRROR + "/" + name + ".gz", init)
-					.then(function (resp) {
-						if (!resp.ok || !("DecompressionStream" in window)) throw new Error("mirror miss");
-						const stream = resp.body.pipeThrough(new DecompressionStream("gzip"));
-						return new Response(stream, { "headers": { "Content-Type": mime } });
-					})
-					.catch(function () { return origFetch(name, init); });
-				}
-			return origFetch.apply(this, arguments);
-		};
-	})();
-	</script>
-	<script>
-	/* CDN mirror shim: big resources (.wasm/.pck) are stored gzip-compressed on
-	   the jsdmirror mirror of this repo (jsDelivr 20 MB/file limit) and
-	   decompressed here via DecompressionStream. Falls back to the raw files
-	   hosted by GitHub Pages when the mirror is unreachable. */
-	(function () {
-		const GZ_MIRROR = "https://cdn.jsdmirror.com/gh/RookieCube/scary-yalu-escape@4b9d84742321/docs";
+		const GZ_MIRROR = "https://cdn.jsdmirror.com/gh/RookieCube/scary-yalu-escape@4d17a43ed899/docs";
 		const origFetch = window.fetch;
 		window.fetch = function (input, init) {
 			const url = typeof input === "string" ? input : (input && input.url) || "";
@@ -161,7 +136,7 @@ body {
 	</script>
 <script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"https://cdn.jsdmirror.com/gh/RookieCube/scary-yalu-escape@4b9d84742321/docs/index","experimentalVK":false,"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"https://cdn.jsdmirror.com/gh/RookieCube/scary-yalu-escape@4d17a43ed899/docs/index","experimentalVK":false,"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
